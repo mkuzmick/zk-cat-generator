@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface PersonalityType {
   code: string;  // e.g., "INFJ"
@@ -102,8 +101,8 @@ export default function Home() {
         try {
           const errorData = await response.json();
           console.error('Detailed error from server:', errorData);
-        } catch (e) {
-          console.error('Could not parse error response');
+        } catch (error) {
+          console.error('Could not parse error response:', error);
         }
         throw new Error(`Server returned ${response.status}: ${response.statusText}`);
       }

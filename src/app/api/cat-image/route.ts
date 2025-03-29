@@ -3,8 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
-// For debugging
-const DEBUG = true;
+// Debug settings managed through environment or process
 
 // Helper function to ensure a directory exists
 async function ensureDirectoryExists(dir: string): Promise<void> {
@@ -235,33 +234,33 @@ export async function GET() {
     if (hasFurPattern && selectedFurPattern) {
       compositeOperations.push({
         input: selectedFurPattern,
-        blend: 'over'
+        blend: 'over' as sharp.Blend
       });
     }
     
     // Add eyes
     compositeOperations.push({
       input: eyesPath,
-      blend: 'over'
+      blend: 'over' as sharp.Blend
     });
     
     // Add mouth
     compositeOperations.push({
       input: mouthPath,
-      blend: 'over'
+      blend: 'over' as sharp.Blend
     });
     
     // Add lines
     compositeOperations.push({
       input: linesPath,
-      blend: 'over'
+      blend: 'over' as sharp.Blend
     });
     
     // Add head accessory (if available)
     if (hasHeadAccessory && headAccPath) {
       compositeOperations.push({
         input: headAccPath,
-        blend: 'over'
+        blend: 'over' as sharp.Blend
       });
     }
     

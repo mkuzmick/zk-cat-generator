@@ -312,15 +312,19 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[cat-details] Unhandled error processing cat details:', error);
-    console.error('[cat-details] Error details:', JSON.stringify(error, Object.getOwnPropertyNames(error)));
+    
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorDetails = error instanceof Error ? JSON.stringify(error, Object.getOwnPropertyNames(error)) : String(error);
+    console.error('[cat-details] Error details:', errorDetails);
+    
     return NextResponse.json(
       { 
         error: 'Failed to process cat details', 
-        errorMessage: error.message,
-        errorType: error.name,
-        errorStack: error.stack
+        errorMessage,
+        errorType: error instanceof Error ? error.name : 'Unknown',
+        errorStack: error instanceof Error ? error.stack : undefined
       },
       { status: 500 }
     );

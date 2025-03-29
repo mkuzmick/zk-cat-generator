@@ -102,8 +102,8 @@ export default function CatImage() {
         try {
           const errorData = await response.json();
           console.error('Detailed error from server:', errorData);
-        } catch (e) {
-          console.error('Could not parse error response');
+        } catch (error) {
+          console.error('Could not parse error response:', error);
         }
         throw new Error(`Server returned ${response.status}: ${response.statusText}`);
       }
