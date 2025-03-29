@@ -192,23 +192,23 @@ export default function CatImage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-8" style={{ backgroundColor: '#f9f3e5', color: '#4a3520' }}>
+    <main className="flex min-h-screen flex-col items-center justify-between p-8" style={{ backgroundColor: "#f9f3e5", color: "#4a3520" }}>
       <div className="relative flex flex-col place-items-center gap-8">
-        <h1 className="text-4xl font-bold" style={{ color: '#4a3520' }}>Random Cat Generator</h1>
+        <h1 className="text-4xl font-bold" style={{ color: "#4a3520" }}>Random Cat Generator</h1>
         
         {/* Cat Image - only render when URL is available (client-side) */}
-        <div className="relative w-[500px] h-[500px] overflow-hidden rounded-lg shadow-xl" style={{ backgroundColor: '#fff9ec' }}>
+        <div className="relative w-[500px] h-[500px] overflow-hidden rounded-lg shadow-xl" style={{ backgroundColor: "#fff9ec" }}>
           {imageUrl ? (
             <Image
               src={imageUrl}
               alt="Random generated cat"
               fill
-              style={{ objectFit: 'contain' }}
+              style={{ objectFit: "contain" }}
               priority
             />
           ) : (
             <div className="flex items-center justify-center h-full w-full">
-              <p style={{ color: '#4a3520' }}>Loading cat...</p>
+              <p style={{ color: "#4a3520" }}>Loading cat...</p>
             </div>
           )}
         </div>
@@ -217,8 +217,8 @@ export default function CatImage() {
         <div className="flex flex-col items-center gap-4">
           {suggestedName ? (
             <div className="text-center">
-              <h2 className="text-2xl font-bold mb-2" style={{ color: '#4a3520' }}>Meet {suggestedName}!</h2>
-              <p className="text-sm mb-3" style={{ color: '#8c6d4f' }}>
+              <h2 className="text-2xl font-bold mb-2" style={{ color: "#4a3520" }}>Meet {suggestedName}!</h2>
+              <p className="text-sm mb-3" style={{ color: "#8c6d4f" }}>
                 This name was selected based on the visual features of your cat.
               </p>
               
@@ -226,13 +226,13 @@ export default function CatImage() {
                 <button
                   onClick={getCatBackstory}
                   className="px-6 py-2 text-sm font-bold rounded-lg transition-colors"
-                  style={{ backgroundColor: '#6d8c4f', color: '#fff9ec', borderColor: '#4a3520' }}
+                  style={{ backgroundColor: "#6d8c4f", color: "#fff9ec", borderColor: "#4a3520" }}
                 >
-                  Discover {suggestedName}'s Story
+                  Discover {suggestedName}&apos;s Story
                 </button>
               ) : isLoadingDetails ? (
-                <p className="text-sm italic" style={{ color: '#8c6d4f' }}>
-                  Crafting {suggestedName}'s story...
+                <p className="text-sm italic" style={{ color: "#8c6d4f" }}>
+                  Crafting {suggestedName}&apos;s story...
                 </p>
               ) : null}
             </div>
@@ -255,9 +255,9 @@ export default function CatImage() {
         
         {/* Cat Details Section */}
         {catDetails && (
-          <div className="w-full max-w-2xl mt-6 p-6 rounded-lg shadow-md" style={{ backgroundColor: '#fff9ec', color: '#4a3520' }}>
-            <h2 className="text-2xl font-bold mb-4 border-b pb-2" style={{ borderColor: '#8c6d4f' }}>
-              {catDetails.name}'s Profile
+          <div className="w-full max-w-2xl mt-6 p-6 rounded-lg shadow-md" style={{ backgroundColor: "#fff9ec", color: "#4a3520" }}>
+            <h2 className="text-2xl font-bold mb-4 border-b pb-2" style={{ borderColor: "#8c6d4f" }}>
+              {catDetails.name}&apos;s Profile
             </h2>
             
             {/* Myers-Briggs Personality Type */}
@@ -278,7 +278,7 @@ export default function CatImage() {
               <h3 className="text-lg font-semibold mb-2">Adventurer Stats:</h3>
               <div className="grid grid-cols-3 gap-3 md:grid-cols-6">
                 {Object.entries(catDetails.dndAttributes).map(([attr, value]) => (
-                  <div key={attr} className="flex flex-col items-center p-2 rounded" style={{ backgroundColor: '#e6d7c3' }}>
+                  <div key={attr} className="flex flex-col items-center p-2 rounded" style={{ backgroundColor: "#e6d7c3" }}>
                     <span className="capitalize text-sm">{attr}</span>
                     <span className="font-bold">{value}</span>
                   </div>
@@ -289,7 +289,7 @@ export default function CatImage() {
             {/* Backstory */}
             <div className="mb-6">
               <h3 className="text-lg font-semibold mb-2">Backstory:</h3>
-              <div className="prose" style={{ color: '#4a3520' }}>
+              <div className="prose" style={{ color: "#4a3520" }}>
                 {catDetails.backstory.split('\n\n').map((paragraph, index) => (
                   <p key={index} className="text-sm mb-3">{paragraph}</p>
                 ))}
@@ -300,12 +300,12 @@ export default function CatImage() {
             {catDetails.timeline && catDetails.timeline.length > 0 && (
               <div>
                 <h3 className="text-lg font-semibold mb-3">Life Timeline:</h3>
-                <div className="relative border-l-2 pl-6 ml-4" style={{ borderColor: '#8c6d4f' }}>
+                <div className="relative border-l-2 pl-6 ml-4" style={{ borderColor: "#8c6d4f" }}>
                   {catDetails.timeline.map((event, index) => (
                     <div key={index} className="mb-5 relative">
                       <div 
                         className="absolute w-4 h-4 rounded-full -left-8 mt-1" 
-                        style={{ backgroundColor: '#6d8c4f' }}
+                        style={{ backgroundColor: "#6d8c4f" }}
                       ></div>
                       <h4 className="text-md font-bold">{event.age}</h4>
                       <p className="text-sm">{event.description}</p>
