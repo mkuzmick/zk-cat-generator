@@ -98,6 +98,13 @@ export default function CatImage() {
       
       if (!response.ok) {
         console.error('Error response from server:', response.status, response.statusText);
+        // Try to get more detailed error info if available
+        try {
+          const errorData = await response.json();
+          console.error('Detailed error from server:', errorData);
+        } catch (e) {
+          console.error('Could not parse error response');
+        }
         throw new Error(`Server returned ${response.status}: ${response.statusText}`);
       }
       
@@ -110,9 +117,17 @@ export default function CatImage() {
         console.log('Set suggested name to:', data.name);
       } else {
         console.error('No name found in response:', data);
+        // Fallback to a default name if the API doesn't return one
+        const defaultName = "Mystery Cat";
+        console.log('Using fallback name:', defaultName);
+        setSuggestedName(defaultName);
       }
     } catch (error) {
       console.error('Error getting cat name suggestion:', error);
+      // Use a fallback name in case of error
+      const fallbackName = "Mystery Cat";
+      console.log('Using error fallback name:', fallbackName);
+      setSuggestedName(fallbackName);
     } finally {
       setIsLoadingName(false);
     }
@@ -242,9 +257,9 @@ export default function CatImage() {
               disabled={isLoadingName || !imageUrl}
               className="px-6 py-3 font-bold rounded-lg transition-colors"
               style={{
-                backgroundColor: '#6d8c4f', 
-                color: '#fff9ec', 
-                borderColor: '#4a3520',
+                backgroundColor: "#6d8c4f", 
+                color: "#fff9ec", 
+                borderColor: "#4a3520",
                 opacity: isLoadingName || !imageUrl ? 0.7 : 1
               }}
             >

@@ -1,14 +1,8 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
 import OpenAI from 'openai';
 import { catNames, catBackstoryPrompts } from '@/data/cats';
 
-// Create a temporary folder for storing images if it doesn't exist
-const tempDir = path.join(process.cwd(), 'temp');
-if (!fs.existsSync(tempDir)) {
-  fs.mkdirSync(tempDir);
-}
+// No temporary folder creation - Vercel has a read-only filesystem
 
 // Initialize OpenAI client
 const openai = new OpenAI({
@@ -45,6 +39,7 @@ interface CatDetails {
 // Function to get just a name suggestion using ChatCompletions API instead of Responses API
 async function getCatNameSuggestion(imageBase64: string): Promise<string> {
   try {
+    console.log('[cat-details] Starting name suggestion with OpenAI API');
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [
@@ -83,11 +78,13 @@ async function getCatNameSuggestion(imageBase64: string): Promise<string> {
     }
     
     // Fallback name using prefixes and suffixes from our data file
+    console.log('[cat-details] Using fallback random name');
     const randomPrefix = catNames.prefixes[Math.floor(Math.random() * catNames.prefixes.length)];
     const randomSuffix = catNames.suffixes[Math.floor(Math.random() * catNames.suffixes.length)];
     return `${randomPrefix}${randomSuffix}`;
   } catch (error) {
-    console.error('Error getting cat name suggestion:', error);
+    console.error('[cat-details] Error getting cat name suggestion:', error);
+    console.error('[cat-details] Error details:', JSON.stringify(error, Object.getOwnPropertyNames(error)));
     // Return a random name if there's an error
     const randomPrefix = catNames.prefixes[Math.floor(Math.random() * catNames.prefixes.length)];
     const randomSuffix = catNames.suffixes[Math.floor(Math.random() * catNames.suffixes.length)];
@@ -227,6 +224,7 @@ export async function POST(request: Request) {
     console.log('[cat-details] Request action:', action);
     console.log('[cat-details] Name provided:', !!name);
     console.log('[cat-details] Image data length:', imageData ? imageData.length : 0);
+    console.log('[cat-details] OpenAI API key exists:', !!process.env.OPENAI_API_KEY);
     
     if (!imageData) {
       console.error('[cat-details] Error: No image data provided');
@@ -314,10 +312,16 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error('[cat-details] Unhandled error processing cat details:', error);
+    console.error('[cat-details] Error details:', JSON.stringify(error, Object.getOwnPropertyNames(error)));
     return NextResponse.json(
-      { error: 'Failed to process cat details' },
+      { 
+        error: 'Failed to process cat details', 
+        errorMessage: error.message,
+        errorType: error.name,
+        errorStack: error.stack
+      },
       { status: 500 }
     );
   }
