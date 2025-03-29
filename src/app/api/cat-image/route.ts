@@ -16,7 +16,7 @@ function getRandomFile(directory: string): string {
   return path.join(directory, files[randomIndex]);
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   try {    
     // Base paths
     const basePath = path.join(process.cwd(), 'public', 'images', 'essential');

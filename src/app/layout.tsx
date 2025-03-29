@@ -21,12 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* Add direct link to Google Font */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
-      </head>
+      <head />
+      {/* Use Next.js font system instead of direct links which cause warnings */}
       <body className={specialElite.className}>
         {children}
       </body>

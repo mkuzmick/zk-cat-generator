@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import OpenAI from 'openai';
-import { randomBytes } from 'crypto';
 import { catNames, catBackstoryPrompts } from '@/data/cats';
 
 // Create a temporary folder for storing images if it doesn't exist

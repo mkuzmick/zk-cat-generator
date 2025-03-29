@@ -4,12 +4,6 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface CatNameResponse {
-  name: string;
-  prefixes: string[];
-  suffixes: string[];
-}
-
 interface PersonalityType {
   code: string;  // e.g., "INFJ"
   title: string; // e.g., "The Advocate"
@@ -254,7 +248,7 @@ export default function CatImage() {
                 opacity: isLoadingName || !imageUrl ? 0.7 : 1
               }}
             >
-              {isLoadingName ? 'Finding the perfect name...' : 'Suggest a Name'}
+              {isLoadingName ? "Finding the perfect name..." : "Suggest a Name"}
             </button>
           )}
         </div>
@@ -270,7 +264,7 @@ export default function CatImage() {
             <div className="mb-4">
               <h3 className="text-lg font-semibold mb-1">Personality Type:</h3>
               <div className="flex items-center gap-2">
-                <span className="px-2 py-1 rounded font-mono" style={{ backgroundColor: '#e6d7c3' }}>
+                <span className="px-2 py-1 rounded font-mono" style={{ backgroundColor: "#e6d7c3" }}>
                   {catDetails.personalityType.code}
                 </span>
                 <span className="font-medium">
