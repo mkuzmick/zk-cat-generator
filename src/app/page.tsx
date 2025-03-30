@@ -38,12 +38,12 @@ export default function Home() {
   const [imageData, setImageData] = useState<string | null>(null);
   const [suggestedName, setSuggestedName] = useState<string | null>(null);
   const [catDetails, setCatDetails] = useState<CatDetails | null>(null);
-  const [isLoadingImage, setIsLoadingImage] = useState(true);
+  // const [isLoadingImage, setIsLoadingImage] = useState(true);
   const [isLoadingName, setIsLoadingName] = useState(false);
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
   const [isLoadingTimeline, setIsLoadingTimeline] = useState(false);
-  const [streamedBackstory, setStreamedBackstory] = useState<string>('');
-  const [streamedTimeline, setStreamedTimeline] = useState<TimelineEvent[]>([]);
+  // const [streamedBackstory, setStreamedBackstory] = useState<string>('');
+  // const [streamedTimeline, setStreamedTimeline] = useState<TimelineEvent[]>([]);
   
   // Ref for profile card to scroll to
   const profileCardRef = useRef<HTMLDivElement>(null);
@@ -58,9 +58,9 @@ export default function Home() {
     setSuggestedName(null);
     setCatDetails(null);
     // Reset the backstory state and ref!
-    setStreamedBackstory('');
+    // setStreamedBackstory('');
     backstoryRef.current = '';
-    setIsLoadingImage(true);
+    // setIsLoadingImage(true);
     
     const timestamp = Date.now();
     try {
@@ -75,7 +75,7 @@ export default function Home() {
         const base64data = reader.result as string;
         setImageData(base64data);
         setImageUrl(URL.createObjectURL(blob));
-        setIsLoadingImage(false);
+        // setIsLoadingImage(false);
       };
       
       // Reset additional states
@@ -168,9 +168,9 @@ export default function Home() {
     
     // Reset states and backstory ref
     setIsLoadingDetails(true);
-    setStreamedBackstory('');
+    // setStreamedBackstory('');
     backstoryRef.current = '';
-    setStreamedTimeline([]);
+    // setStreamedTimeline([]);
     
     try {
       // Step 1: Get personality type
@@ -318,7 +318,7 @@ export default function Home() {
                 // Update the ref immediately
                 backstoryRef.current += data.text;
                 // Update state for UI
-                setStreamedBackstory(prev => prev + data.text);
+                // setStreamedBackstory(prev => prev + data.text);
                 setCatDetails(prev => {
                   if (!prev) return null;
                   return {
